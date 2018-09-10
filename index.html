@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Icon API - by Pateo</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    crossorigin="anonymous">
+
+
+</head>
+
+<body>
+
+  <form id="form">
+    <label for="">Search for an icon</label>
+    <input type="text" id="search">
+    <button id="submit">Submit</button>
+  </form>
+
+  <i id="icon"></i>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script>
+
+    $('#form').on('submit', (e) => {
+      e.preventDefault()
+      findAndSetIcon()
+    })
+
+    function findAndSetIcon() {
+      let searchVal = $('#search').val()
+
+      fetch(`/find/${searchVal}`)
+        .then((res) => res.json())
+        .then((data) => {
+          $('#icon').removeClass().addClass(data.icon.solid)
+        })
+    }
+
+  </script>
+
+</body>
+
+</html>

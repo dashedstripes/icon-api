@@ -1,6 +1,7 @@
+const path = require('path')
 const express = require('express')
-const app = express()
 const bodyParser = require('body-parser')
+const app = express()
 
 const WORDS = require('./data/words')
 
@@ -13,10 +14,8 @@ const findIconByWord = (word) => {
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.get('/', (res) => res.json({
-  hello: 'Search for an icon by typing a word after /find/:your_word',
-  for_example: 'icons.pateo.co/find/person'
-}))
+app.get('/', (req, res) => res.sendFile(path.join(__dirname + '/index.html')))
+
 app.get('/find/:word', (req, res) => {
   return res.json(findIconByWord(req.params.word))
 })
